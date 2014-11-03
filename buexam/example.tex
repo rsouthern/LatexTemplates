@@ -1,0 +1,170 @@
+% Note this requires the (standard) exam package
+\documentclass[a4paper,12pt,addpoints]{exam} 
+
+% Your distro may not have these packages. On ubuntu, you need texlive-science. On windows, miktex should find them for you.
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%This is the package which you need to include
+\usepackage{buexam}
+% Specify the course name here
+\renewcommand{\coursetitle}{Software Development for Animation, Games and Effects}
+% Give an acronym or short version of the course name here
+\renewcommand{\coursetitleshort}{SDAGE}
+% The Unit title of the exam (append RESIT to the end if necessary)
+\renewcommand{\unittitle}{Zombies in Popular Media and Mathematics}
+% A shortened / abbreviated name of the unit
+\renewcommand{\unittitleshort}{ZPMM}
+% The unit reference (might be the same as short name)
+\renewcommand{\unitref}{ZPMM}
+% The level of the examination (C,I,H etc)
+\renewcommand{\unitlevel}{I}
+% The exam reference (get this from the school
+\renewcommand{\examref}{ZZZ1234Z}
+% The date of the exam
+\renewcommand{\examdate}{10/06/2013}
+% The time of the exam
+\renewcommand{\examtime}{12h00}
+% The time that this exam was created - removing the line defaults to todays date (date of compile)
+%\renewcommand{\exampublishdate}{\today}
+% Unit leader of the course
+\renewcommand{\unitleadername}{Richard Southern}
+% Unit leader extension
+\renewcommand{\unitleaderext}{61877}
+% Assistant name
+\renewcommand{\assistantname}{Ben Ellis}
+% Assitant extension
+\renewcommand{\assistantext}{65745}
+
+% Insert series table contents here: first column is programme name, second column is corresponding programme code
+% Note that this is for all programmes that share this unit (and exam). Currently this is supported up to C (i.e. 3 different
+% programmes) - it is easily ammended in the stylesheet.
+\renewcommand{\stagetitleA}{BA (Hons) Communication and Media – Level I}
+\renewcommand{\stagerefA}{BACOMMF/I}
+\renewcommand{\stagetitleB}{BA (Hons) English – Level I}
+\renewcommand{\stagerefB}{BAEF/I}
+                  
+% There are the specific instructions for candidates
+\renewcommand{\instructionstocandidates}{
+\begin{itemize}
+\item There are \textbf{THREE} questions
+\item Answer \textbf{ALL} questions
+\item All questions carry equal marks
+\item \textbf{NO} calculators, laptops or any other electronic equipment are permitted
+\item \textbf{NO} additional materials may be used
+\end{itemize}
+}
+
+% This option should be commented out for the final paper (don't forget!)
+\printanswers
+
+\begin{document}
+
+% Note that this command will create ``Section B\\Answer All Questions'' - you have to use this, as it is in an itemized environment.
+\sectioninstructions{Answer ALL Questions}
+
+% Questions can consist of multiple parts. Note that the sum of the parts must make the total (in this case, [15]).
+\titledquestion{Zombies in films}[15]
+Consider Zombies in films. 
+\begin{parts}\addtolength{\itemsep}{-0.5\baselineskip}
+% Simple  question example
+\part[5] Name some films with Zombies \droppoints
+\begin{solution}
+\begin{itemize}
+\item Pride and Prejudice... with Zombies!
+\item Abraham Lincoln... Zombie Hunter!
+\item etc.
+\end{itemize}
+\end{solution}
+
+% Maths example
+\part[10] State the average number of characters eaten by a single Zombie in "`28 Days Later"'. Use the following formula:
+\begin{align}
+\bar{x} &= \frac{1}{n}\cdot \sum_{i=1}^{n} x_i \nonumber
+\end{align}\droppoints
+\begin{solution}
+At least 3. Zombies are awesome.
+\end{solution}
+\end{parts}
+
+% A newpage is required between sections
+\newpage
+
+% Note that this command will create ``Section B\\Answer Only ODD numbered questions'' - you have to use this, as it is in an itemized environment.
+\sectioninstructions{Answer Only ODD numbered questions}
+
+\titledquestion{Zombie Programming}[10]
+Consider the following code segment:
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+
+int main ()
+{
+  cout << "Hello World!";
+  return 0;
+}
+\end{lstlisting}
+In your own words, explain:
+\begin{parts}
+%Example of code inclusion
+\part[10] Was this code produced by a Zombie? If so, why?\droppoints
+\begin{solution}
+Clearly, the lameness indicates that it is Zombie generated code (ZGC).
+\end{solution}
+
+\part[5] How would you improve on the above code? \droppoints
+\begin{solution}
+Don't use the std namespace! Better to give your fingers exercise and type it every time.
+\end{solution}
+\end{parts}
+\newpage
+
+\titledquestion{Zombie Algorithms}[15]
+\begin{parts}
+
+% Example of an algorithm
+ \part[10] Consider the following algorithm:
+
+\begin{algorithmic}
+\REQUIRE $n \geq 0$
+\ENSURE $y = x^n$
+\STATE $y \leftarrow 1$
+\STATE $X \leftarrow x$
+\STATE $N \leftarrow n$
+\WHILE{$N \neq 0$}
+\IF{$N$ is even}
+\STATE $X \leftarrow X \times X$
+\STATE $N \leftarrow N / 2$
+\ELSE[$N$ is odd]
+\STATE $y \leftarrow y \times X$
+\STATE $N \leftarrow N - 1$
+\ENDIF
+\ENDWHILE
+\end{algorithmic}
+
+Describe in your own words the thought processes required for a Zombie to generate this algorithm. How can the promise of fresh brains serve as a motivators? \droppoints
+\begin{solution}
+Blah blah blah.
+\end{solution}
+
+% Example of image inclusion
+\part[5] Admire our institution's mighty logo:
+\begin{center}
+\includegraphics[width=0.1\textwidth]{bulogo}
+\end{center}
+Draw this in a manner similar to a Zombie. Coloured pens are provided.\droppoints
+\begin{solution}
+Blah blah blah.
+\end{solution}
+
+\end{parts}
+
+
+% The postamble is needed as part of the uni style. (this cannot be automatic as AtEndOfDocument adds a \newpage)
+\afterlastquestion
+
+\end{document}
+
+

@@ -1,0 +1,216 @@
+% This can only be used with the ``exam'' document class
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{buexam}[2013/02/26 Custom LaTeX Style for Bournemouth University Examinations, written by Richard Southern]
+
+% Need this to include the logo
+\usepackage{graphicx}
+
+% Use this for date time formatting
+\usepackage{datetime}
+
+% Used for table center alignment
+\usepackage{tabularx}
+
+% Need to change the display on the last page
+\usepackage{lastpage}
+
+% needed for underlining
+\usepackage[normalem]{ulem}
+
+% Specify spacing between lines (setstretch gives you more control)
+\usepackage{setspace}
+%\onehalfspacing
+\setstretch{1.2}
+
+% Headers and footers
+\usepackage[lastpage,user]{zref} % needed for page numbers apparently
+\pagestyle{headandfoot}
+\widowpenalty=10000
+\clubpenalty=10000
+%\renewcommand{\partshook}{\setlength{\topsep}{0.35in}}
+%\renewcommand{\subpartshook}{\setlength{\topsep}{0.25in}}
+\renewcommand{\questionshook}{\setlength{\itemsep}{0.5in}}
+\renewcommand{\partshook}{\setlength{\itemsep}{0.5in}}
+\renewcommand{\subpartshook}{\setlength{\itemsep}{0.5in}}
+% Use Arial font throughout
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% This line uses the lastpage package and either prints ``continued'' or ``end of paper'' depending on whether you are on the
+% last page or not. Noindent is necessary otherwise the text doesn't align with the page number.
+\newcommand{\printcontinue}[0]{\noindent\ifnum\thepage<\pageref{LastPage}\emph{Continued}\else\emph{End of paper}\fi}
+
+\newcounter{sectioncount}
+\setcounter{sectioncount}{1}
+
+\newcommand{\sectioninstructions}[1] {
+	\item[] {
+		\hspace{-1cm}	
+		\begin{tabular}{l}
+			\noindent \large \textbf{\uline{SECTION \Alph{sectioncount}}}\\
+			\noindent \large #1
+		\end{tabular} \addtocounter{sectioncount}{1}
+	}
+}
+
+\runningheader{}{\unittitle}{Page \thepage\ of \pageref{LastPage}}
+\runningfooter{\printcontinue}{}{\exampublishdate}
+
+% This is the formatting command for questions - currently displays name of question
+\qformat{\large\textbf{Question \thequestion: \thequestiontitle}\dotfill(\thepoints)}
+
+% In case we're not using hyperref.sty:
+%\providecommand{\texorpdfstring}[2]{#1}
+% The following can be used in \section commands
+% without generating pdf warnings:
+%\newcommand{\bs}{\texorpdfstring{\char`\\}{}}
+
+% Exam details - these must be renewed in the including file before the bucoversheet is called
+\newcommand{\coursetitle}{Course Title: replace with ``\textbackslash renewcommand\{ \textbackslash coursetitle\}\{*\}''}
+\newcommand{\coursetitleshort}{\textbackslash coursetitleshort}
+\newcommand{\unittitle}{Unit Title: replace with ``\textbackslash renewcommand\{\textbackslash unittitle\}\{*\}''}
+\newcommand{\unittitleshort}{\textbackslash unittitleshort}
+\newcommand{\unitlevel}{\textbackslash unitlevel}
+\newcommand{\unitref}{\textbackslash unitref}
+\newcommand{\unitleadername}{``\textbackslash renewcommand\{\textbackslash unitleadername\}\{*\}''}
+\newcommand{\unitleaderext}{``\textbackslash renewcommand\{\textbackslash unitleaderext\}\{*\}''}
+\newcommand{\assistantname}{``\textbackslash renewcommand\{\textbackslash assistantname\}\{*\}''}
+\newcommand{\assistantext}{``\textbackslash renewcommand\{\textbackslash assistantext\}\{*\}''}
+
+
+\newcommand{\examref}{\textbackslash examref}
+\newcommand{\examdate}{\textbackslash examdate}
+\newcommand{\examtime}{\textbackslash examtime}
+\newcommand{\exampublishdate}{\ddmmyyyydate\today}
+
+% Note that currently only 5 stage references are allowed, as I haven't figured out a neat way to do this 
+% (currently only the first 3 are displayed: you need to uncomment some lines in the table below to see them)
+\newcommand{\stagetitleA}{``\textbackslash renewcommand\{\textbackslash stagetitleA\}\{*\}''}
+\newcommand{\stagerefA}{``\textbackslash renewcommand\{\textbackslash stagerefA\}\{*\}''}
+\newcommand{\stagetitleB}{}
+\newcommand{\stagerefB}{}
+\newcommand{\stagetitleC}{}
+\newcommand{\stagerefC}{}
+\newcommand{\stagetitleD}{}
+\newcommand{\stagerefD}{}
+\newcommand{\stagetitleE}{}
+\newcommand{\stagerefE}{}
+
+
+
+\newcommand{\instructionstocandidates}{Instructions for candidates: replace with ``\textbackslash renewcommand\{\textbackslash instructionstocandidates\}\{*\}''}
+
+
+% This is the mark style (currently square brackets, dropped at end of question).
+% To get the mark for the question you need to use \droppoint at the place you want the marks to be displayed.
+\marksnotpoints
+\pointsdroppedatright
+\bracketedpoints
+
+% This defines the numbering, so we have 2.3.1 for subparts. Goes down to subsubparts
+\renewcommand{\thepartno}{\arabic{partno}}
+\renewcommand{\thesubpart}{\arabic{subpart}}
+\renewcommand{\partlabel}{\thequestion.\thepartno}
+\renewcommand{\subpartlabel}{\thequestion.\thepartno.\thesubpart}
+\renewcommand{\subsubpartlabel}{\thequestion.\thepartno.\thesubpart.\thesubsubpart}
+
+% This draws a line across the screen, used with the bucoversheet. You can change the thickness of the line (currently 2pt)
+\newcommand{\thinline}{\noindent\rule{\textwidth}{1.5pt}}
+
+
+% STUFF FOR CODE LISTINGS - currently only C++ is supported
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  language=C++,                % the language of the code
+  basicstyle=\normalsize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\normalsize,          % the size of the fonts that are used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  %backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  %frame=single,                   % adds a frame around the code
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  numberstyle=\tiny\color{gray},        % line number style
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  fontadjust=false,		  % Update the column width based on smaller fonts
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+%\setlength\parskip{33pt}  % our strange value
+\lstset{aboveskip=6pt plus 2pt, belowskip=-20pt plus 2pt}
+
+% This is the coversheet. This should be at the start of your document. Note that it ends on a \newpage
+\AtBeginDocument{
+% Titlepage goes here
+%\\\vspace{0.5cm}\\{\noindent \large \bf \coursetitle}\\\vspace{1cm}\\
+
+\noindent \begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+ \begin{tabular}[b]{l}\includegraphics[width=0.18\textwidth]{bulogo.png}\end{tabular}&
+ \begin{tabular}[b]{l l}
+ \textbf{Unit Ref:}&\unitref \\
+ \textbf{Date:}&\examdate \\
+ \textbf{Time:}&\examtime \\
+ \textbf{Level:}&\unitlevel
+ \end{tabular}
+\end{tabular}\\\vspace{1cm}
+
+\thinline
+\vspace{0.5cm}\\
+\begin{tabular}{p{0.2\textwidth}p{0.8\textwidth}}
+{\large \bf \emph{\examref}}&
+{\large \bf \unittitle}
+\end{tabular}\vspace{0.5cm}\\
+\thinline
+\vspace{0.5cm} \\
+\begin{tabular}{p{0.7\textwidth}p{0.3\textwidth}}
+\textbf{Stage Name}&\textbf{Stage Reference}\\
+\stagetitleA&\stagerefA\\
+\stagetitleB&\stagerefB\\
+\stagetitleC&\stagerefC
+%\stagetitleD&\stagerefD\\
+%\stagetitleE&\stagerefE
+\end{tabular}\vspace{0.5cm}\\
+\thinline
+\vspace{0.5cm}\\
+% Student ID now falls under instructions for candidates
+%\\{\noindent \large \bf \noindent Student ID\dotfill}\\\vspace{0.5cm}\\
+{\noindent\bf \uline{INSTRUCTIONS TO CANDIDATES:}}
+\instructionstocandidates
+\vfill\noindent QUESTIONS TO START ON $2^{nd}$ PAGE (no questions on first/front cover sheet)
+\newpage
+\begin{questions}
+}
+
+\AtEndDocument{
+\end{questions}
+}
+
+% This used to be in an \AtEndOfDocument environment, but this adds a \newpage, which does not
+% conform with the stylesheet. You need to add this after the last question.
+\newcommand{\afterlastquestion}[0]{
+\vspace{0.2cm}\thinline \\ \vspace{0.2cm}
+
+\begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
+Paper reference\dotfill&\examref\\
+Date\dotfill&\exampublishdate\\
+Name of Unit leader\dotfill&\unitleadername\\
+Ext No.\dotfill&\unitleaderext\\
+Name of PA\dotfill&\assistantname\\
+Ext No.\dotfill&\assistantext
+\end{tabular}
+}
